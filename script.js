@@ -58,7 +58,7 @@ let year = now.getFullYear()
 
 // STEP 10: Build the date string: month + "/" + day + "/" + year
 //          Display it in the element with ID "myDate"
-document.getElementById("myDate").innerHTML = month + "/" + day + "/" + year
+document.getElementById("myDate").innerHTML = month + "/" + date + "/" + year
 
 
 // ============================================
@@ -80,10 +80,12 @@ let starttime = new Date().getTime()
 //          b) Calculate elapsed seconds: (currentTime - startTime) / 1000
 //          c) Display the elapsed time using .toFixed(3)
 //             in the element with ID "myTimer"
-let timerid = setInterval(starttime, 10);
-let currenttime = new Date().getTime()
-let elapsed = (currentTime - startTime) / 1000
-document.getElementById("myTimer").innerHTML = elapsed.toFixed(3)
+let timerid = setInterval(updateTimer, 10);
+function updateTimer() {
+    let currenttime = new Date().getTime()
+    let elapsed = (currentTime - startTime) / 1000
+    document.getElementById("myTimer").innerHTML = elapsed.toFixed(3)
+}
 
 
 // ============================================
@@ -111,12 +113,16 @@ let running = true;
 //             - Start a new setInterval (same as STEP 12)
 //             - Change button innerHTML to "Stop"
 //             - Set running to true
+let myBtn = document.getElementById("myBtn")
 myBtn.addEventListener('click', function() {
     if(running) {
-        clearInterval(interval)
+        clearInterval(timerid)
+        myBtn.innerHTML = "Start"
         running = false
     } else {
-        interval = setInterval(time, 10)
+        startTime = new Date().getTime()
+        timerid = setInterval(updateTimer, 10)
+        myBtn.innerHTML = "Stop"
         running = true
     }
 })
