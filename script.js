@@ -83,7 +83,7 @@ let starttime = new Date().getTime()
 let timerid = setInterval(updateTimer, 10);
 function updateTimer() {
     let currenttime = new Date().getTime()
-    let elapsed = (currentTime - startTime) / 1000
+    let elapsed = (currenttime - starttime) / 1000
     document.getElementById("myTimer").innerHTML = elapsed.toFixed(3)
 }
 
@@ -120,7 +120,7 @@ myBtn.addEventListener('click', function() {
         myBtn.innerHTML = "Start"
         running = false
     } else {
-        startTime = new Date().getTime()
+        starttime = new Date().getTime()
         timerid = setInterval(updateTimer, 10)
         myBtn.innerHTML = "Stop"
         running = true
